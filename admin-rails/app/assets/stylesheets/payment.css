@@ -1,0 +1,33 @@
+.steps-bar {
+  list-style-type: none;
+  display: inline-block;
+  background-color: orange;
+  float: left;
+}
+
+.payment-type {
+  float: left;
+}
+
+.steps-bar ul, .steps-bar li {
+  display: inline;
+  float: left;
+}
+
+.payment-heading {
+  display: inline-block;
+  float: left;
+  margin: 0;
+}
+
+.payment-type > li {
+  display: block;
+  width: 3em;
+  height: 2em;
+  margin-right: 1em;
+  background-color: grey;
+}
+
+.payment-btn {
+  width: 100%;
+}

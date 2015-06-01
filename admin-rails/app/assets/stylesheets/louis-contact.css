@@ -1,0 +1,31 @@
+#Contact {
+}
+
+.individual-contact {
+  clear: both;
+  margin-bottom: 25px;
+  overflow: hidden;
+}
+
+
+.individual-details {
+  margin-left:220px;
+}
+
+
+.individual-img > img {
+  height: 200px;
+  width: 200px;
+  float: left;
+}
+
+.individual-contact ul {
+  padding: 0;
+}
+
+.individual-contact li {
+  display: block;
+  list-style-type: none;
+  padding: 0;
+}
+

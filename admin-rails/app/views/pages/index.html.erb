@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<!-- ::::: NOTE CHANGES APART FROM HTML
+  1. Update SVG LOGOs
+  2. Update SVG BADGEs
+  ::::: -->
+
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <title>WDI CONF 2015</title>
+
+    <!-- Meta -->
+    <meta name="description" content="A General Assembly's Project">
+    <meta name="keywords" content="HTML,CSS,XML,JavaScript">
+    <meta name="author" content="Team UXB">
+
+    <!-- Google Font -->
+    <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+
+    <!-- FavIco -->
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    
+ <!--    <link rel="stylesheet" href="stylesheets/app.css" />
+    <link rel="stylesheet" href="stylesheets/jared.css" />
+    <link rel="stylesheet" href="stylesheets/jaya.css" />
+    <link rel="stylesheet" href="stylesheets/louis-contact.css" />
+    <link rel="stylesheet" href="stylesheets/payment.css">
+    <link rel="stylesheet" href="stylesheets/louis-getthere.css" />
+    <link rel="stylesheet" href="stylesheets/slide.css">
+    <link rel="stylesheet" href="stylesheets/faq-accordian.css">
+    <link rel="stylesheet" href="stylesheets/speaker-hover.css"> -->
+
+    <!-- Final CSS -->
+    <!-- <link rel="stylesheet" href="stylesheets/main.css"> -->
+
+    <!-- // <script src="js/modernizr.js"></script> -->
+
+
+  <script type="text/x-underscore-template" id="speaker-desktop-template">
+
+    <a href="" alt="" title="">
+    <%= image_tag('{{image_url}}', 'alt'=>'speaker', 'class' => 'th') %>
+    <div><span>{{name}} - {{title}}</span></div>
+    </a>
+  </script>
+
+  <script type="text/x-underscore-template" id="speaker-mobile-template">
+    <div class="row">
+      <div class="small-5 columns container_150">
+        <%= image_tag('{{image_url}}', 'alt'=>'photo', 'id' => 'Speakers-list-image') %>
+        <h4 id="Speakers-list-name" itemprop="name">{{name}}</h4>
+      </div>
+      <div class="small-7 columns container_150">
+        <h3>{{title}}</h3>
+        <h5 id="Speakers-list-time">{{start_time}} - {{end_time}}</h5>
+      </div>
+    </div>
+    <div class="row">
+      <div class="small-5 columns container_100">
+        <ul class="inline-list" id ="Speakers-list-badges">
+          <li class="badge">
+            <%= image_tag('{{badge_url}}', 'title' => 'Front End Development', 'alt' => 'Front End Development', 'class' => 'has-tip', 'data' => { 'hastooltip' => '' }, 'aria' => { 'haspopup' => true }) %>
+          </li>
+        </ul>
+      </div>
+      <div class="small-7 columns container_100">
+        <button class="btnbtnmobile button slider-toggle" data-slider-page=".schedule">Buy ticket</button>
+      </div>
+    </div>
+  </script>
+
+  <script type="text/x-underscore-template" id="talk-template">
+    <section class="sched-row-time medium-2 columns">
+      <h3>{{startTime}} &ndash;</h3>
+      <h3>{{endTime}}</h3>
+    </section>
+    <section class="sched-row-Details medium-7 columns">
+      <h4>{{title}}</h4>
+      <h5>By: {{speaker}}</h5>
+    </section>
+    <section class="sched-row-Ticket medium-3 columns">
+      <h3>Free</h3>
+      <input id="qty-input" class="sched-row-TicketInput" type="number" placeholder="0" value="0">
+      <div class="button-sched-wrapper">
+        <button id="add-qty"><i class="fa fa-plus"></i></button>
+        <button id="minus-qty"><i class="fa fa-minus"></i></button>
+      </div>
+    </section>
+  </script>
+
+  <script type="text/x-underscore-template" id="talks-template">
+    <%= image_tag('wdiconf_logo_bw.svg', 'class' => 'wdiBW_logo') %>
+    <p class="totalTicket-wrapper">Total tickets: <span id="ticketsQty">0</span></p>
+
+    <p class="pageNumberSlide-Wrapper">Page <span id="current_page">{{currentPage}}</span> of <span id="max_page">{{maxPage}}</span></p>
+    <div class="clearfix"></div>
+    <div class="row rowrowSlidePage">
+        <ul id="listSlidePage" class="inline-list">
+      <li id="FE">
+        <%= image_tag('badge_fed.svg', 'title' => 'Front End Development', 'alt' => 'Front End Development') %>
+      </li>
+      <li id="BE">
+        <%= image_tag('badge_bed.svg', 'title' => 'Back End Development', 'alt' => 'Back End Development') %>
+      </li>
+      <li id="Tech">
+        <%= image_tag('badge_tech.svg', 'title' => 'Technology', 'alt' => 'Technology') %>
+      </li>
+      <li id="All">
+        <%= image_tag('badge_all.svg', 'title' => 'All categories', 'alt' => 'All categories') %>
+      </li>
+    </ul>
+    <button id="talks-next">Next</button>
+      <button id="talks-previous">Previous</button>
+      
+    </div>
+    <div class="row rowrowSlidePage">
+      <ul id="Sched" >
+      
+      </ul>
+      <button id="talks-next">Next</button>
+      <button id="talks-previous">Previous</button>
+    </div>
+  </script>
+
+  <script type="text/x-underscore-template" id="tickets-template">
+    <td>
+      <h3>{{ title }}</h3>
+      <h4 itemprop="name">by {{ speaker }}</h4>
+    </td>
+    <td>
+      <h5>{{ start_time }} - {{ end_time }}</h5>
+    </td>
+    <td>
+      <p>Free</p>
+    </td>
+  </script>
+
+
+  </head>
+
+  <body>
+
+    <!-- 
+      General Assembly's
+      Web Development Immersive 2015
+
+      TEAM UXB
+      Project Manager: Philip Castiglione
+      Lead Rail's MVC and Rails's Infrastructure: JC Lee
+      Lead Backbone's MVC: Jaya Wijono
+      Sinatra API: Louis Moore
+      Information Architecture and Content: Luke Shillabeer
+      Lead UX, UI, Design and Front End Developer: Beta Ngadiman
+      UX and Front End Development Team:
+      - Senior Front End Developer: Jared O'Loughlin and Philip Castiglione
+      - UX and Front End Developer: Jaya Wijono and Louis Moore
+      Testing: Jaya Wijono
+      Deployment: Philip Castiglione
+      Git Manager and Database Migration: Luke Shillabeer
+
+      Git address: https://github.com/TeamUXB
+    -->
+
+
+  <!-- :::::::::: MULTI LEVEL SLIDE PAGES JavaScript by Philip Castiglione, BackBone Helpers Philip Castiglione and Luke Shillabeer :::::::::: -->
+
+  <!-- :::::::::: SCHEDULE PAGE BackBone by Jaya Wijono, HTML and UX by Beta Ngadiman :::::::::: -->
+
+  <div class="schedule-slider-cover slider-toggle" data-slider-page=".schedule"></div>
+  <div class="schedule-slider">
+    <div class="slider-cross slider-toggle" data-slider-page=".schedule"><i class="fa fa-times"></i> Close</div>
+    <div class="schedule-container"></div>
+    <div class="row rowrowSlidePage rowrowSlidePagePage">
+      <button class="slider-toggle checkoutCheckoutBTN" data-slider-page=".payment">Checkout</button>
+    </div>
+    
+  </div>
+
+  <!-- :::::::::: PAYMENT PAGE BackBone by Jaya Wijono, HTML by Louis Moore, UX by Beta Ngadiman :::::::::: -->
+
+  <div class="payment-slider-cover slider-toggle" data-slider-page=".payment"></div>
+  <div class="payment-slider">
+    <div class="slider-cross slider-toggle closeSliderSpecial" data-slider-page=".payment"><i class="fa fa-times"></i> Close</div>
+    <div class="payment-container">
+      <div class="large-10 medium-10 columns">
+        <%= image_tag("wdiconf_logo_ww.svg", 'class'=> "wdiBW_logo", 'alt'=>'WDI2015') %>
+        <h3 class="payment-container-header">Ticket #19248</h3>
+
+        <section class="myForm-Wrapper">
+          <form id="myForm" method="post" action="http://localhost:3000/api/mailer/payment" data-abide>
+            <div class="row">
+              <div class="large-6 medium-6 columns">
+                <small class="error">Your first name is required.</small>
+                <input type="text" placeholder="First Name" name="payment-firstName" required>
+              </div>
+              <div class="large-6 medium-6 columns end">
+                <small class="error">Your surname name is required.</small>
+                <input type="text" placeholder="Surname" name="payment-surname" required>
+              </div>
+              <div class="large-12 medium-12 columns end">
+                <small class="error">Please enter a valid email(so we can send you your ticket!)</small>
+                <input type="text" placeholder="Email Address" name="payment-email" required>
+              </div>
+            </div>
+            <div class="row">
+              <div class="large-12 medium-12 columns">
+                <h4>Payment details go here:</h4>
+              </div>
+              <div class="large-6 medium-6 columns">
+                <small class="error">Your full name is required.</small>
+                <input type="text" placeholder="Name on card" name="payment-fullName">
+              </div>
+              <div class="large-6 medium-6 columns">
+                <small class="error">A valid card number is required.</small>
+                <input type="text" placeholder="Card number" name="payment-cardNumber">
+              </div>
+            </div>
+            <div class="row">
+              <div class="large-2 medium-2 columns">
+                <small class="error">Please select a month.</small>
+                <input type="text" placeholder="Month" name="payment-month">
+              </div>
+              <div class="large-2 medium-2 columns end">
+                <small class="error">A valid CCV code is required.</small>
+                <input type="text" placeholder="CCV" name="payment-ccv">
+              </div>
+            </div>
+            <div class="row">
+              <div class="paymentPaymentRight">
+                <button type="submit" class="main-button button" >Cancel</button> 
+                <button type="submit" class="main-button button" data-reveal-id="ConfirmationModal" >Make Payment</button>
+              </div>
+            </div>
+          </form>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <!-- ::::: HEADER SECTION HTML and UX by Jared O'Loughlin ::::: -->
+  <div id="content">
+    <div class="header-fixed">
+      <!-- empty container for fix bg-image -->  
+    </div>
+
+    <header id="Home" class="row header-inner">
+        
+      <p class="show-nav show-for-small-down" ><i class="fa fa-bars"></i> Menu</p>
+      
+      <section class="row"> 
+
+        <section class="medium-7 medium-centered columns">
+          <div class="row">
+            <%= image_tag("wdiconf_logo.svg", 'class'=> "main-logo medium-8 columns", 'alt'=>'WDI2015') %>
+            <%= image_tag("wdi_logo_ga.svg", 'class'=> "main-logo medium-4 columns", 'alt'=>'WDI2015') %>
+          </div>
+        </section>
+      </section>
+
+      <h2 class="welcome-msg">General Assembly&#39;s Web Development Immersive Conference. Get Educated.</h2>
+
+      <button class="main-button button large slider-toggle" data-slider-page=".schedule">Buy ticket</button>
+   
+      <nav class="main-nav hide-for-small-down show-for-medium-up">
+        <ul>
+          <li class="logoNavLI">
+            <a id="nav-home" class="main-nav-bar" href="#Home">
+              <%= image_tag("wdiconf_logo_menuBar.svg") %>
+            </a>
+          </li>
+          <li><a href="#Speakers">Speakers</a></li>
+          <li><a href="#About">About</a></li>
+          <li><a href="#Location">Location</a></li>
+          <li><a href="#Sponsors">Sponsors</a></li>
+          <li><a href="#Contact">Contact</a></li>
+          <li class="buyTicketLI"><button class="slider-toggle" id="nav-tickets" data-slider-page=".schedule">Buy tickets</button></li>
+        </ul>
+      </nav>
+
+      <!-- Mobile Nav -->
+      <nav id="MobileMobile-nav" class="mobile">
+        
+        <section id="NavClose"><i class="fa fa-times"></i> Close</section>
+
+        <section class="mobileMobile-Nav-Wrapper">
+            <%= image_tag("wdiconf_logo.svg", 'class'=> "main-logo", 'alt'=>'WDI2015') %>
+            <%= image_tag("wdi_logo_ga.svg", 'class'=> "main-logo main-logo-date-mobile", 'alt'=>'WDI2015') %>
+        </section>
+
+        <ul>
+            <li><a href="#Home">HOME</a></li>
+            <li><a href="#Speakers-head">Speakers</a></li>
+            <li><a href="#About">About</a></li>
+            <li><a href="#Location">Location</a></li>
+            <li><a href="#Sponsors">Sponsors</a></li>
+            <li><a href="#Contact">Contact</a></li>
+            <li><a href="#" class="main-button-mobilebile button slider-toggle" id="nav-mobile-tickets" data-slider-page=".schedule">BUY TICKETS</a></li>
+          </ul>
+
+      </nav>
+
+    </header>
+
+    <main role="main" class="main" id="main">
+
+    <!-- ::::: SPEAKER SECTION HTML and UX by Jaya Wijono and Jared O'Loughlin ::::: -->
+      <section id="Speakers">
+        <section class="row" id="Speakers-head">
+          <h2 class="small-12 medium-6 columns small-only-text-center text-right">SPEAKERS</h2>
+          <ul class="inline-list small-12 medium-6 columns small-only-text-center" id ="Speakers-head-badges">
+            <li id="BtnFilterFrontend" class="badge inactive">
+              <%= image_tag("badge_fed.svg", 'class'=> "has-tip", 'title'=>'Front End Development', 'alt'=>'Front End Development', "data" => { :tooltip => '' }, "aria" => { :haspopup => true }) %>
+            </li> 
+            <li id="BtnFilterBackend" class="badge inactive">
+              <%= image_tag("badge_bed.svg", 'class'=> "has-tip", 'title'=>'Back End Development', 'alt'=>'Back End Development', "data" => { :tooltip => '' }, "aria" => { :haspopup => true }) %>
+            </li> 
+            <li id="BtnFilterTech" class="badge inactive">
+              <%= image_tag("badge_tech.svg", 'class'=> "has-tip", 'title'=>'Technology', 'alt'=>'Technology', "data" => { :tooltip => '' }, "aria" => { :haspopup => true }) %>
+            </li> 
+            <li id="BtnShowAll" class="badge active">
+              <%= image_tag("badge_all.svg", 'class'=> "has-tip", 'title'=>'All categories', 'alt'=>'All categories', "data" => { :tooltip => '' }, "aria" => { :haspopup => true }) %>
+            </li> 
+          </ul>
+        </section>
+        
+        <section class="row hide-for-small-only" id="Speakers-details">
+          <figure class="main-figure medium-4 columns container_200">
+            <img id="Speakers-details-highlightedImage" src="" alt="photo">
+          </figure>
+          <div class="medium-5 columns container_200">
+            <h3></h3>
+            <p></p>
+            <ul class="inline-list" id ="Speakers-details-badges">
+              <li class="badge">
+                <%= image_tag("badge_fed.svg", 'class'=> "has-tip", 'title'=>'Front End Development', 'alt'=>'Front End Development', "data" => { :tooltip => '' }, "aria" => { :haspopup => true }) %>
+              </li>
+            </ul>
+          </div>
+          <div class="talk-details medium-3 columns container_200">
+            <h4 itemprop="name"></h4>
+            <h5></h5>
+            <button id="Speakers-details-CTA-btn" class="slider-toggle" data-slider-page=".schedule">Book Now</button>
+          </div>
+        </section>
+
+        <section class="row" id="Speakers-list">
+          <ul id="thumbs" class="thumbs medium-block-grid-4 hide-for-small-only">
+          </ul>
+          <ul id="thumbs-mobile" class="show-for-small-only">
+          </ul>
+
+        </section>
+      </section>
+
+    <!-- ::::: ABOUT SECTION HTML by Jaya Wijono and Jared O'Loughlin, UX by Beta Ngadiman ::::: -->
+      <section id="About">
+        <section class="row">
+          <div class="small-12 medium-6 columns">
+            <h3>Emerging technologies for the web. From the inside.</h3>
+            <p>Today's bleeding edge, life changing tool is tomorrow's defunct framework. Development for the web environment has exploded in complexity and opportunity over the last decade. With so much progress occurring every day how do we keep pace?</p>
+              <p>We gather the brightest minds and immerse them in web development 24 hours a day, 7 days a week for 3 months.</p>
+              <p>Then, we let them talk. <a id="Speakers-list-CTA-btn" href="#Speakers">View available talks</a></p>
+            
+          </div>
+          <div class="small-12 medium-5 medium-offset-1 columns">
+            <h4><i class="fa fa-question-circle"></i> Frequently Asked Questions</h4>
+
+            <dl class="accordion">
+              <dt class="accordion-trigger closed">Where is the Conference?</dt>
+              <dd class="accordion-content">Level 1, 20 Queen Street, CBD</dd>
+              <dt class="accordion-trigger closed">Is there parking?</dt>
+              <dd class="accordion-content">No, sorry</dd>
+              <dt class="accordion-trigger closed">Will alcohol be provided?</dt>
+              <dd class="accordion-content">Yes, but only for the speakers.</dd>
+              <dt class="accordion-trigger closed">How many kilometres are in a mile?</dt>
+              <dd class="accordion-content">1.609344</dd>
+            </dl>
+
+            
+          </div>
+        </section>
+
+        <section class="row">
+          <h3 class="center awesome-people"><span>CURRENT ATTENDANCE</span> 678 AWESOME PEOPLE</h3>
+        </section>
+      </section>
+
+    <!-- ::::: LOCATION SECTION HTML and UX by Louis Moore ::::: -->
+      <section id="Location" class="container">
+        <div class="row">
+          
+          <section class="large-6 medium-6 columns">
+            
+            <div class="location-details">
+              <h2>FIND US AT</h2>
+              <h3>20 Queen Street, Level 1, Melbourne VIC 3000</h3>
+              
+              <ul class="location-ul">
+                <li class="title-details">
+                  <h4><i class="fa fa-train"></i> Using Public Transport</h4>
+                  <p>WDIconf is held at Queen&#39;s Collective, walking distance from Flinders Street Railway Station and close to arterial tram routes through the CBD.</p>
+                </li>
+                <li class="title-details">
+                  <h4><i class="fa fa-bicycle"></i> Using Personal Transport</h4>
+                  <p>Parking in the city is limited so bicycle or taxi is recommended. Alternatively there are multilevel car parks throughout the CBD and on St Kilda Road.</p>
+                </li>
+              </ul>
+            
+            </div>
+
+          </section>
+
+          <section class="large-6 medium-6 columns show-for-medium-up">
+            <div id="Map-canvas"></div>
+          </section>
+
+        </div> 
+      </section> 
+
+    <!-- ::::: SPONSORS SECTION HTML and UX by Luke Shillabeer ::::: -->    
+      <section id="Sponsors">
+        <div class="row">
+          <h2 class="small-12 medium-12 columns text-center">Thank You!</h2>
+          <h3 class="small-12 medium-12 columns text-center">No conference would happen without its sponsors. Well maybe some would. But not this one! Seriously, sign up to a course or check out the awesome coworking spaces in Queen&#39;s Collective.</h3>
+            <ul class="medium-block-grid-2">
+              <li>
+                <div class="platinum-sponsors">
+                  <%= image_tag("ga_logo.jpg", 'alt'=>'big-sponsor') %>
+                  <div class="medium-8 columns hide-for-small-only">
+                    <h6>WORKING KNOWLEDGE. Learn technology, design, and business skills from industry professionals in our global community.</h6>
+                  </div>
+                  <div class="medium-4 columns sponsors-right">
+                    <a href="https://generalassemb.ly/" class="button cta-button-sponsor" target="_blank">Visit website</a>
+                    <ul class="sponsors-sosmed hide-for-small-only">
+                      <li><a href="https://www.facebook.com/gnrlassembly" alt="General Assembly's Facebook page" title="" target="_blank"><i class="fa fa-facebook-square"></i></a></li>
+                      <li><a href="https://twitter.com/ga" alt="General Assembly's Twitter page" title="" target="_blank"><i class="fa fa-twitter-square"></i></a></li>
+                      <li><a href="https://plus.google.com/+GeneralAssembly" alt="General Assemblys Google+ page" title="" target="_blank"><i class="fa fa-google-plus-square"></i></a></li>
+                    </ul>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="platinum-sponsors">
+                  <%= image_tag("qc.jpg", 'alt'=>'big-sponsor') %>
+                  <div class="medium-8 columns hide-for-small-only">
+                    <h6>Queens Collective is Melbourne&#39;s home to world class startups. We&#39;re more than just an office, with amazing startup support, community and events.</h6>
+                  </div>
+                  <div class="medium-4 columns sponsors-right">
+                    <a href="http://www.queenscollective.com/" class="button cta-button-sponsor" target="_blank">Visit website</a>
+                    <ul class="sponsors-sosmed hide-for-small-only">
+                      <li><a href="https://www.facebook.com/queenscollective" alt="Queens Collective Facebook" title="" target="_blank"><i class="fa fa-facebook-square"></i></a></li>
+                      <li><a href="https://twitter.com/QCmelb" alt="Queens Collective Twitter" title="" target="_blank"><i class="fa fa-twitter-square"></i></a></li>
+                      <li><a href="https://instagram.com/queenscollective/" alt="Queens Collective Instagram" title="" target="_blank"><i class="fa fa-instagram"></i></a></li>
+                    </ul>
+                  </div>
+                </div>
+              </li>
+            </ul>
+
+        </div>
+
+        <div class="row">
+          <ul class="platinum-sponsors-img medium-block-grid-5 ">
+            <li>
+              <%= image_tag("sponsor_adobe.jpg", 'alt'=>'small-sponsor') %>
+            </li>
+            <li>
+              <%= image_tag("sponsor_beardoMatt.jpg", 'alt'=>'small-sponsor') %>
+            </li>
+            <li>
+              <%= image_tag("sponsor_thirtyseven.jpg", 'alt'=>'small-sponsor') %>
+            </li>
+            <li>
+              <%= image_tag("sponsor_microsoft.jpg", 'alt'=>'small-sponsor') %>
+            </li>
+            <li>
+              <%= image_tag("sponsor_github.jpg", 'alt'=>'small-sponsor') %>
+            </li>
+          </ul>
+        </div>
+      </section> 
+
+    <!-- ::::: CONTACT SECTION HTML by Louis Moore, UX by Beta Ngadiman ::::: -->
+
+      <section id="Contact">
+        <div class="row">
+          <div id="eventOrganisers" class="medium-6 large-6 columns">
+            <h2>Organizers</h2>
+            <section class="individual-contact">
+              <figure class="individual-img-dt">
+              </figure>
+
+              <div class="individual-details">
+                <h4>Daniel Tsui</h4>
+                <h5>Head Honcho</h5>
+                <ul>
+                  <li><a href="tel:+61432034231"><h6><i class="fa fa-phone"></i> +61 432 034 231</h6></a></li>
+                  <li><a href="mailto:dt@wdiconf.com"><h6><i class="fa fa-envelope"></i> dt@wdiconf.com</h6></a></li>
+
+
+
+                </ul>
+              </div>
+            </section>
+
+            <section class="individual-contact">
+              <figure class="individual-img-msw">
+              </figure>
+              <div class="individual-details">
+                <h4>Matt Swann</h4>
+                <h5>Organizer of Chicken</h5>
+                <ul>
+                  <li><a href="tel:+61432034231"><h6><i class="fa fa-phone"></i> +61 432 034 231</h6></a></li>
+                  <li><a href="mailto:mswann@wdiconf.com"><h6><i class="fa fa-envelope"></i> mswann@wdiconf.com</h6></a></li>
+                </ul>
+              </div>
+            </section>
+          </div>
+          
+          <div id="contactForm" class="medium-6 large-6 columns">
+
+            <h4><i class="fa fa-paper-plane"></i> Contact Us</h4>
+
+            <form id="myContactForm" method="post" action="http://localhost:3000/api/mailer/contact" data-abide>
+              
+              <p>Question? Issue? Query? Rash? See a doctor about one of those. For the other three, we&#39;d love to hear from you. Just use this conveniently located form to send us an email.</p>
+              <input type="text" name="name" placeholder="Full Name" required>
+              
+              <input type="email" name="email" placeholder="Address@email.com" required>
+              
+              <textarea name="message" placeholder="Enter your message here" required></textarea>
+              
+              <input type="submit" class="main-button button" value="Send Message"></button>
+            </form>
+
+          </div>
+        </div>
+      </section> 
+
+    </main>
+
+    <footer>  
+      <div class="row">
+
+      <h6>&copy; 2015 TEAM UXB. <a href="https://generalassemb.ly/" title="General Assembly" alt="General Assembly" target="_blank">A General Assembly Project</a>. <button class="elevator-button"><%= image_tag("tardis.gif") %></button></h6>
+        
+      </div>
+    </footer>
+
+  <div id="ConfirmationModal" class="reveal-modal medium" data-reveal aria-labelledby="confirmationModalTitle" aria-hidden="true" role="dialog">
+    <h2 id="confirmationModalTitle">Thank you, <span>Louis</span></h2>
+    <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dapibus tristique ante quis gravida. Ut vel egestas augue. contact us at <a href="">info@wdiconf.com</a>.</p>
+
+    <table>
+    <thead>
+      <tr class="confirmationModalStyle">
+        <th>Talk</th>
+        <th width="15%">Time</th>
+        <th width="10%">Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="confirmationModalStyle">
+        <td>
+          <h3>ANIMATING IN YOUR BROWSER WITH JAVASCRIPT</h3>
+          <h4 itemprop="name">by James Gallichio</h4>
+        </td>
+        <td>
+          <h5>10.30am - 11.00am</h5>
+        </td>
+        <td>
+          <p>Free</p>
+        </td>
+      </tr>
+      <tr class="confirmationModalStyle">
+        <td>
+          <h3>ANIMATING IN YOUR BROWSER WITH JAVASCRIPT</h3>
+          <h4 itemprop="name">by James Gallichio</h4>
+        </td>
+        <td>
+          <h5>10.30am - 11.00am</h5>
+        </td>
+        <td>
+          <p>Free</p>
+        </td>
+      </tr>
+      <tr class="confirmationModalStyle">
+        <td>
+          <h3>ANIMATING IN YOUR BROWSER WITH JAVASCRIPT</h3>
+          <h4 itemprop="name">by James Gallichio</h4>
+        </td>
+        <td>
+          <h5>10.30am - 11.00am</h5>
+        </td>
+        <td>
+          <p>Free</p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+    <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+  </div>
+</div>
+
+<!--   // <script src="js/jquery.min.js"></script>
+  // <script src="js/foundation.min.js"></script>
+  // <script src="https://maps.googleapis.com/maps/api/js"></script>
+  // <script src="js/map.js"></script>
+  // <script src="js/app.js"></script>
+  // <script src="js/ScrollMagic.min.js"></script>
+  // <script src="js/ScrollToPlugin.min.js"></script>
+  // <script src="js/TweenMax.min.js"></script>
+  // <script src="js/jquery.hoverdir.js"></script>
+  // <script src="js/nav.js"></script>
+  // <script src="js/emailPost.js"></script>
+  // <script src="js/backboneApp/underscore-min.js"></script>
+  // <script src="js/backboneApp/underscore-min.js"></script>
+  // <script src="js/backboneApp/backbone-min.js"></script>
+  // <script src="js/backboneApp/ticket.js"></script>
+  // <script src="js/backboneApp/tickets.js"></script>
+  // <script src="js/backboneApp/speaker.js"></script>
+  // <script src="js/backboneApp/speakers.js"></script>
+  // <script src="js/backboneApp/speakerDesktopView.js"></script>
+  // <script src="js/backboneApp/speakerMobileView.js"></script>
+  // <script src="js/backboneApp/speakersView.js"></script>
+  // <script src="js/backboneApp/talk.js"></script>
+  // <script src="js/backboneApp/talks.js"></script>
+  // <script src="js/backboneApp/chosenTalks.js"></script>
+  // <script src="js/backboneApp/talkView.js"></script>
+  // <script src="js/backboneApp/talksView.js"></script>
+  // <script src="js/backboneApp/backboneMain.js"></script>
+  // <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/2.2.0/isotope.pkgd.min.js"></script>
+  
+  // <script src="js/elevator.js"></script> -->
+
+    
+
+  </body>
+</html>

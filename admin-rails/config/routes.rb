@@ -31,9 +31,10 @@ Rails.application.routes.draw do
     delete  '/logout'             => 'session#destroy',   :as => 'logout'
   # --------------------------
 
-
-  get 'pages/index'
-  get 'pages/about'
+  # ------ Admin routes ------
+  get 'admin/index'             => 'admin#index'  
+  get 'admin/about'             => 'admin#about'
+  # --------------------------
 
    get   '/'                  => 'pages#index',      :as => 'root'
 end
