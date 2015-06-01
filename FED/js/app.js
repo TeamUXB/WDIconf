@@ -65,9 +65,9 @@ $('.accordion-trigger').on('click', function() {
 window.onload = function() {
   var elevator = new Elevator({
     element: document.querySelector('.elevator-button'),
-    mainAudio: './assets/doctorwho.mp3',
+    mainAudio: './assets/elevator.mp3',
     endAudio: './assets/ding.mp3',
-    duration: 7580 // milliseconds
+    duration: 30000 // milliseconds
   });
 }
 
