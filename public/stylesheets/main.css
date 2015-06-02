@@ -102,6 +102,7 @@ input[type="text"], input[type="password"], input[type="date"], input[type="date
   width: 100%;
   position: fixed;
   /*background: url(<%=asset_path 'wdiconf_bg_mini.jpg'%>);*/
+  background: url('/images/wdiconf_bg_mini.jpg');
   background-size: cover;
   z-index: -1;
   top:0;
@@ -249,6 +250,7 @@ text-transform: uppercase;
 /***** LOCATION SETTING *****/
 #Location {
 	/*background: url(<%=asset_path 'melbourne_mini.jpg'%>) no-repeat center center;*/
+  background: url('/images/melbourne_mini.jpg') no-repeat center center;
 	background-size: cover;
 	padding-top:70px;
 	padding-bottom: 4em;
@@ -296,6 +298,7 @@ text-transform: uppercase;
 	padding-top:70px;
 	padding-bottom: 4em;
 	/*background: url(<%=asset_path 'geometry.png'%>);*/
+  background: url('/images/geometry.png');
 }
 
 #Sponsors h2 {
@@ -376,7 +379,8 @@ border-bottom: 1px solid #aaa;
 .individual-img-dt {
 	width: 150px;
 	height: 150px;
-	/*background: url(<%=asset_path 'dt.jpg'%>)no-repeat center center;*/
+  /*background: url(<%=asset_path 'dt.jpg'%>)no-repeat center center;*/
+  background: url('/images/dt.jpg')no-repeat center center;
 	-webkit-background-size: cover;
 	background-size: cover;
 	border-radius: 100%;
@@ -387,6 +391,7 @@ border-bottom: 1px solid #aaa;
 	width: 150px;
 	height: 150px;
 	/*background: url(<%=asset_path 'msw.jpg'%>)no-repeat center center;*/
+  background: url('/images/msw.jpg')no-repeat center center;
 	-webkit-background-size: cover;
 	background-size: cover;
 	border-radius: 100%;
@@ -1016,6 +1021,4 @@ footer h6 {
    width: 25px;
 
 }
-
-
 

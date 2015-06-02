@@ -7,7 +7,6 @@
 }
 
 #Sponsors {
-  /*background: url(<%=asset_path 'geometry.png'%>);*/
   background: url('/images/geometry.png');
 }
 
