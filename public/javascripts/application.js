@@ -10,7 +10,39 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-// 
+//= require jquery
+//= require jquery.turbolinks
+//= require jquery_ujs
+//= require turbolinks
+//= require underscore-min
+//= require modernizr
+//= require jquery.hoverdir
+//= require foundation.min
+//= require google-maps-api
+//= require map
+//= require app
+//= require ScrollMagic.min
+//= require ScrollToPlugin.min
+//= require TweenMax.min
+//= require nav
+//= require emailPost
+//= require backbone-min
+//= require backboneApp/ticket
+//= require backboneApp/tickets
+//= require backboneApp/speaker
+//= require backboneApp/speakers
+//= require backboneApp/speakerDesktopView
+//= require backboneApp/speakerMobileView
+//= require backboneApp/speakersView
+//= require backboneApp/talk
+//= require backboneApp/talks
+//= require backboneApp/chosenTalks
+//= require backboneApp/talkView
+//= require backboneApp/talksView
+//= require backboneApp/backboneMain
+//= require isotope
+//= require elevator
+//= require_self
 
 //$(function() {
 var talk_draggable = function() {
