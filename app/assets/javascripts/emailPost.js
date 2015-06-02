@@ -9,7 +9,7 @@ var runContactEmail = function(e) {
     message: e.target[2].value
   };
 
-  $.post('http://localhost:3000/api/mailer/contact', data);
+  $.post('/api/mailer/contact', data);
 };
 
 var runPaymentEmail = function(e) {
@@ -26,7 +26,7 @@ var runPaymentEmail = function(e) {
     card_ccv: e.target[6].value
   };
 
-  $.post('http://localhost:3000/api/mailer/payment', data, function(){
+  $.post('/api/mailer/payment', data, function(){
     console.log(' ~~~MODAL GO!');
     // ~~~MODAL GO!
   });

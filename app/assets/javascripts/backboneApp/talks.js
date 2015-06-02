@@ -1,7 +1,7 @@
 var Talks = Backbone.Collection.extend({
   model: Talk,
 
-  url: 'http://localhost:3000/api/talks',
+  url: '/api/talks',
 
   displayFilteredCollection: function(tag){
     tag = tag || 'All';
