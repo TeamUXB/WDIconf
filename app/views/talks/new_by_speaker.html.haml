@@ -1,0 +1,14 @@
+= render 'admin_default'
+%div.content
+  %h1 Add Talk
+  .talk_form
+    = form_for @talk do |f|
+      = render :partial => "form", :locals => {:f => f}
+
+
+  :javascript
+    $('#duration input[type="range"').on('change', function() {
+      $parent = $(this).parent();
+      $parent.find('em').html($(this).val());
+      console.log($(this).val())
+    });

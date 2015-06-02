@@ -1,0 +1,14 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title Wdiconf
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = stylesheet_link_tag 'http://fonts.googleapis.com/css?family=Montserrat:400,700'
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    /= javascript_include_tag 'jquery-ui' => true
+    = csrf_meta_tags
+  %body
+
+    %div.container
+      = yield

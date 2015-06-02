@@ -1,0 +1,32 @@
+= render 'admin_default'
+%h1 Pages#about
+%p Find me in app/views/pages/about.html.erb
+.form
+  = form_tag
+  %p
+    %label{:for => "talk_title"} Talk Title
+    %input{:name => "talk_title", :type => "text"}/
+  %p
+    %label{:for => "talk_blurb"} Talk Blurb
+    %input{:name => "talk_blurb", :type => "text"}/
+  %p
+    %label{:for => "talk_desc"} Talk Description
+    %textarea{:name => "talk_desc"}
+  %p
+    %label{:for => "talk_desc"} date
+    %input{:disabled => "disabled", :name => "talk_date", :type => "date", :value => "2015-05-29"}/
+  %p
+    %label{:for => "talk_desc"} time
+    %input{:max => "16:30:00", :min => "10:00:00", :name => "talk_time", :type => "time"}/
+  %p
+    %label{:for => "talk_desc"} Speaker
+    %select#speaker_name{:name => "speaker_name"}
+      %option{:value => "100"} Daniel Tsui
+  %input{:name => "limit", :type => "hidden", :value => "30"}/
+  %input{:name => "duration", :type => "hidden", :value => "60"}/
+  %input{:type => "submit"}/
+  = end
+:javascript
+  $('#add_talk').on('click', function() {
+    $('.talk_form').html(#{render 'form'});
+  });

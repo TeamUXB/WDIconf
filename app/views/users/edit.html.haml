@@ -1,0 +1,8 @@
+= render 'admin_default'
+%div.content
+  %h1 Edit Profile
+
+  %div.user_form
+    = form_for :user, :action => user_update_path, :method =>:put  do |f|
+      = render :partial => "form", :locals => {:f => f}
+      = f.submit "Save User"

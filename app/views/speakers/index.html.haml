@@ -1,0 +1,18 @@
+= render 'admin_default'
+%div.content.speakers
+  %h1 All Speakers
+
+  - @speakers.each do |speaker|
+    %a{:href=>"/speakers/#{speaker.id}"}
+      %article.speaker
+        %p.speaker_avatar
+          -if speaker[:image].nil?
+            %image{:src=>"http://placehold.it/200x200"}
+          -else
+            = image_tag speaker.image
+
+        %h1= speaker.name
+        %p= speaker.blurb
+        %p.speaker_operation
+          =link_to 'Edit', "/speakers/#{speaker.id}/edit"
+          =link_to 'Delete', "/speakers/#{speaker.id}", :method => "delete"

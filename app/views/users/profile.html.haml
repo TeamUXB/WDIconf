@@ -1,0 +1,11 @@
+= render 'admin_default'
+%div.content
+  %h1 Users#profile
+
+  %p
+    Email:
+    = @user.email
+  %p
+    Access Type:
+    = @user.access_level.access_type
+

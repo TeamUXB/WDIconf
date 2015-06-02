@@ -1,0 +1,23 @@
+= render 'admin_default'
+%div.row
+  = render "side_navbar"
+  %div.content.medium-10.column
+
+    %h2 All Users
+    %table
+      %thead
+        %tr
+          %th User Email
+          %th User Type
+          %th
+          %th
+      - @users.each do | user|
+        %tr
+          %td
+            = user.email
+          %td
+            = @access_type[user.access_level_id-1].access_type
+          %td
+            %a{:href => "#{user.id}/profile"} Show
+          %td
+            %a{:href => "#{user.id}/edit"} Edit

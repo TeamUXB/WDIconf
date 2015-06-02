@@ -1,0 +1,15 @@
+= render 'admin_default'
+%div.small-3.columns.content#talk-list
+  %h2 All Talks
+  - @talks.each do |talk|
+    %div.single-talk.draggable
+      %div
+        %h1= talk.title
+        %p= talk.blurb
+        %p
+          =link_to 'Edit', "/talks/#{talk.id}/edit"
+          / by
+          / = talk.speaker.name
+          / %a{:href => "#{talk.id}/profile"} Show
+          / %a{:href => "#{talk.id}/edit"} Edit
+          %div.talk-box-close x

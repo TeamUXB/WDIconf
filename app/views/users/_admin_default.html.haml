@@ -1,0 +1,19 @@
+= stylesheet_link_tag "general", media: "all"
+= stylesheet_link_tag "nav", media: "all"
+= stylesheet_link_tag "talks", media: "all"
+= stylesheet_link_tag "speakers", media: "all"
+
+%nav.top-bar{"data-topbar" => "", :role => "navigation"}
+  %section.navbar-wrapper
+    %ul.title-area
+      / Title Area
+      %li.name
+        %h1
+          %a{:href => root_path} Admin Rails
+      / Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone
+      %li.toggle-topbar.menu-icon
+        %a{:href => ""}
+          %span Menu
+    %section.top-bar-section
+      = render '/layouts/navbar'
+      = render '/layouts/login_form'
