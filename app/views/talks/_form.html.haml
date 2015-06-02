@@ -11,7 +11,6 @@
 
 %p
   = f.label :speaker_id, "Speaker"
-  - binding.pry
   = f.select("speaker_id", Speaker.all.collect {|sp| [sp.name.capitalize, sp.id]}, :selected=>@talk.speaker_id)
 
 %p

@@ -18,7 +18,6 @@ class SessionController < ApplicationController
     else
       render :json => { msg: [1,"Your email and/or password were invalid. Please try again."]}
     end
-    #binding.pry
     # @user = User.find_by(email: params[:email])
 
     # if @user && @user.authenticate(params[:password])

@@ -43,7 +43,6 @@ class SpeakersController < ApplicationController
   end
 
   def speaker_params
-    binding.pry
     params.require(:speaker).permit(:name, :blurb, :image, :remote_image_url)
   end
 

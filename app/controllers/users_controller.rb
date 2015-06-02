@@ -16,7 +16,6 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(get_user_params)
-    binding.pry
     @user.save
 
     if @user.save
@@ -38,7 +37,6 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     #@user = get_user_params
-    #binding.pry
     if @user.update(get_user_params)
       redirect_to users_all_path
     else
@@ -58,7 +56,6 @@ class UsersController < ApplicationController
   end
 
   def get_user_params
-    binding.pry
     params.require(:user).permit(:email, :access_level_id, :login_type, :password, :password_confirmation)
 
   end

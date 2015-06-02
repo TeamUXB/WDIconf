@@ -56,7 +56,6 @@ class TalksController < ApplicationController
   end
 
   def get_talk_params
-    binding.pry
     params.require(:talk).permit(:title, :blurb, :description, :speaker_id, :date, :duration, :limit)
   end
 
