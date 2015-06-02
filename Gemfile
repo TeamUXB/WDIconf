@@ -40,6 +40,8 @@ gem 'mini_magick', '3.8.0'
 # Rack CORS Middleware
 gem 'rack-cors', :require => 'rack/cors'
 
+# Make heroku logs not terrible
+gem 'rails_12factor', group: :production
 
 # Use Unicorn as the app server
 # gem 'unicorn'
