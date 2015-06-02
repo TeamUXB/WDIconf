@@ -1,5 +1,5 @@
 require 'sinatra/base'
-require 'pry'
+# require 'pry'
 
 
 class SinatraApi < Sinatra::Base
