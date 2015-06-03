@@ -13,30 +13,32 @@ var TalkView = Backbone.View.extend({
   },
 
   addQty: function(){
-    // need validation that qty is <= limit
     var currentQty = parseInt($(this.el).find("#qty-input").val(),10);
     var totalQty = parseInt($("#ticketsQty").html(),10);
-    $(this.el).find("#qty-input").val(currentQty + 1);
-    $("#ticketsQty").html(totalQty + 1);
-    this.qty = currentQty + 1;
-    chosenTalks.add(new Talk({
-      title: this.model.get('title'), 
-      speaker: this.model.get('speaker')['name'],
-      start_time: this.model.get('start_time'),
-      end_time: this.model.timePlusMinutes(this.model.get('start_time'),15)
-    }));
-    console.log(chosenTalks);
+    if(currentQty < this.model.get('limit')){
+      $(this.el).find("#qty-input").val(currentQty + 1);
+      $("#ticketsQty").html(totalQty + 1);
+      this.qty = currentQty + 1;
+      chosenTalks.add(new Talk({
+        title: this.model.get('title'), 
+        speaker: this.model.get('speaker')['name'],
+        start_time: this.model.get('start_time'),
+        end_time: this.model.timePlusMinutes(this.model.get('start_time'),15)
+      }));
+      console.log(chosenTalks);
+    }
   },
 
   minusQty: function(){
-    //need validation that qty is > 0
     var currentQty = parseInt($(this.el).find("#qty-input").val(),10);
     var totalQty = parseInt($("#ticketsQty").html(),10);
-    $(this.el).find("#qty-input").val(currentQty - 1);
-    $("#ticketsQty").html(totalQty - 1);
-    this.qty = currentQty - 1;
-    chosenTalks.remove(chosenTalks.findWhere({title: this.model.get('title')}));
-    console.log(chosenTalks);
+    if(currentQty > 0){
+      $(this.el).find("#qty-input").val(currentQty - 1);
+      $("#ticketsQty").html(totalQty - 1);
+      this.qty = currentQty - 1;
+      chosenTalks.remove(chosenTalks.findWhere({title: this.model.get('title')}));
+      console.log(chosenTalks);
+    }
   },
 
   render: function(){

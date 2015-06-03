@@ -43,10 +43,20 @@ var TalksView = Backbone.View.extend({
     _.each(filteredPagination,this.addOne, this);
   },
 
+  validatePageDisplay: function(){
+    var currentPage = this.model.currentPage;
+    if(currentPage === 1){
+      $($(this.el).find("#talks-previous")).addClass('hidden');
+    } else if (currentPage === this.model.maxPage()) {
+      $($(this.el).find("#talks-next")).addClass('hidden');
+    }
+  },
+
   render: function(){
     var talksTemplate = _.template( $('#talks-template').html());
     this.$el.html(talksTemplate({currentPage: this.model.currentPage,maxPage: this.model.maxPage()}));
     this.addAll();
+    this.validatePageDisplay();
     return this;
   }
 });
